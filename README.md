@@ -137,3 +137,31 @@ SQL-схема для такої міграції вже збережена в `
 ## Ліцензія
 
 Власник проєкту може додати потрібну ліцензію перед публічним відкриттям репозиторію.
+
+
+## Production admin bootstrap
+
+On the first Render deployment, add these Environment Variables:
+
+```text
+NODE_ENV=production
+JWT_SECRET=<long random secret, 32+ characters>
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=<strong password, 10+ characters>
+```
+
+The server creates the first administrator automatically only when `admin_users` is empty. After the first successful deployment and login, you may remove `ADMIN_PASSWORD` from Render; the existing bcrypt password hash remains in the database.
+
+Admin panel:
+
+```text
+https://<your-render-domain>/admin/
+```
+
+Health check:
+
+```text
+https://<your-render-domain>/health
+```
+
+> Note: the current JSON database and local uploads are suitable for a test/small deployment but are not durable on an ephemeral host. For production data persistence, migrate the database to PostgreSQL/Supabase and uploads to object storage.

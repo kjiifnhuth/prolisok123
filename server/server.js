@@ -18,7 +18,15 @@ const UPLOAD_DIR = path.join(ROOT, 'storage', 'uploads');
 
 const PORT = Number(process.env.PORT || 3000);
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
+const JWT_SECRET = process.env.JWT_SECRET || (
+  IS_PRODUCTION ? '' : crypto.randomBytes(32).toString('hex')
+);
+const BOOTSTRAP_ADMIN_USERNAME = String(process.env.ADMIN_USERNAME || '').trim().slice(0, 80);
+const BOOTSTRAP_ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || '');
+
+if (IS_PRODUCTION && JWT_SECRET.length < 32) {
+  throw new Error('JWT_SECRET must be configured in production and contain at least 32 characters.');
+}
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 const MAX_FILES_PER_REQUEST = 20;
 
@@ -115,6 +123,37 @@ function readDatabase() {
 }
 
 let db = readDatabase();
+
+async function ensureBootstrapAdmin() {
+  if (db.admin_users.length > 0) return;
+
+  if (!BOOTSTRAP_ADMIN_USERNAME && !BOOTSTRAP_ADMIN_PASSWORD) {
+    console.warn('[AUTH] No admin user exists. Set ADMIN_USERNAME and ADMIN_PASSWORD in the hosting environment to create the first administrator.');
+    return;
+  }
+
+  if (!BOOTSTRAP_ADMIN_USERNAME || !BOOTSTRAP_ADMIN_PASSWORD) {
+    throw new Error('ADMIN_USERNAME and ADMIN_PASSWORD must be provided together when bootstrapping the first administrator.');
+  }
+
+  if (BOOTSTRAP_ADMIN_PASSWORD.length < 10) {
+    throw new Error('ADMIN_PASSWORD must contain at least 10 characters.');
+  }
+
+  const passwordHash = await bcrypt.hash(BOOTSTRAP_ADMIN_PASSWORD, 12);
+
+  db.admin_users.push({
+    id: createId(),
+    username: BOOTSTRAP_ADMIN_USERNAME,
+    password_hash: passwordHash,
+    active: true,
+    created_at: now(),
+    updated_at: now(),
+  });
+
+  save();
+  console.log(`[AUTH] Bootstrap administrator created: ${BOOTSTRAP_ADMIN_USERNAME}`);
+}
 
 const save = () => writeDatabase(db);
 const now = () => new Date().toISOString();
@@ -253,6 +292,7 @@ ensureAboutPageContent();
 
 const app = express();
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
@@ -451,11 +491,15 @@ function verifyDraftAccess(req) {
 app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
-    mode: 'local',
+    mode: IS_PRODUCTION ? 'production' : 'local',
     database: 'json',
     uptime: process.uptime(),
     time: now(),
   });
+});
+
+app.get('/health', (_req, res) => {
+  res.json({ ok: true, service: 'prolisok' });
 });
 
 app.post('/api/auth/login', async (req, res) => {
@@ -490,7 +534,7 @@ app.post('/api/auth/login', async (req, res) => {
   res.cookie('prolisok_admin', signedToken(normalizedUsername), {
     httpOnly: true,
     sameSite: 'lax',
-    secure: false,
+    secure: IS_PRODUCTION,
     maxAge: 8 * 60 * 60 * 1000,
     path: '/',
   });
@@ -819,14 +863,27 @@ app.use((error, _req, res, _next) => {
 });
 
 if (require.main === module) {
-  const server = app.listen(PORT, () => {
-    console.log(`\nPROLISOK\nSite:  http://localhost:${PORT}\nAdmin: http://localhost:${PORT}/admin/\n`);
-  });
+  let server;
+
+  ensureBootstrapAdmin()
+    .then(() => {
+      server = app.listen(PORT, () => {
+        console.log(`\nPROLISOK\nSite:  http://localhost:${PORT}\nAdmin: http://localhost:${PORT}/admin/\n`);
+      });
+    })
+    .catch((error) => {
+      console.error('[STARTUP ERROR]', error.message);
+      process.exit(1);
+    });
 
   function shutdown(signal) {
     console.log(`\n${signal}: saving data...`);
     save();
-    server.close(() => process.exit(0));
+    if (server) {
+      server.close(() => process.exit(0));
+    } else {
+      process.exit(0);
+    }
   }
 
   process.on('SIGINT', () => shutdown('SIGINT'));
