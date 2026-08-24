@@ -2390,15 +2390,84 @@ table {
   }
 }
 
-/* Mobile home: keep the hero compact and content-first. */
+/* Mobile home: keep the hero compact while keeping the artwork visible. */
 @media (max-width: 760px) {
   body[data-page="home"] .hero-art {
-    display: none;
+    display: block;
+    width: min(100%, 340px);
+    min-height: 220px;
+    height: 220px;
+    margin: 4px auto 0;
   }
 
   body[data-page="home"] .hero-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  body[data-page="home"] .art-card {
+    inset: 4px 0 0;
+    border-radius: 18px;
+  }
+
+  body[data-page="home"] .art-sticker {
+    top: 16px;
+    right: -2px;
+    padding: 9px 11px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  body[data-page="home"] .art-house {
+    left: 28px;
+    bottom: 28px;
+    transform: scale(.48);
+    transform-origin: left bottom;
+  }
+
+  body[data-page="home"] .art-tree {
+    right: 18px;
+    bottom: 24px;
+    transform: scale(.52);
+    transform-origin: right bottom;
+  }
+
+  body[data-page="home"] .art-child {
+    transform: scale(.52);
+    transform-origin: bottom center;
+  }
+
+  body[data-page="home"] .child-a {
+    left: 142px;
+    bottom: 22px;
+  }
+
+  body[data-page="home"] .child-b {
+    left: 182px;
+    bottom: 22px;
+  }
+
+  body[data-page="home"] .art-sun {
+    width: 46px;
+    height: 46px;
+    right: 30px;
+    top: 28px;
+    box-shadow: 0 0 0 7px rgba(214, 223, 201, .36);
+  }
+
+  body[data-page="home"] .art-sky::before {
+    width: 100px;
+    height: 22px;
+    left: 24px;
+    top: 38px;
+    box-shadow: 50px 6px 0 -6px rgba(255,255,255,.62);
+  }
+
+  body[data-page="home"] .art-sky::after {
+    width: 76px;
+    height: 19px;
+    right: 30px;
+    top: 92px;
   }
 
   body[data-page="home"] .hero {
