@@ -2389,3 +2389,58 @@ table {
     transform: none;
   }
 }
+
+/* Mobile home: keep the hero compact and content-first. */
+@media (max-width: 760px) {
+  body[data-page="home"] .hero-art {
+    display: none;
+  }
+
+  body[data-page="home"] .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  body[data-page="home"] .hero {
+    padding: 28px 0 42px;
+  }
+
+  body[data-page="home"] .hero h1 {
+    font-size: clamp(28px, 8.5vw, 36px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+  }
+
+  body[data-page="home"] .hero-title-card {
+    padding: 18px;
+  }
+
+  body[data-page="home"] .hero-title-lead,
+  body[data-page="home"] .hero-copy > p[data-hero-sub] {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  body[data-page="home"] .hero-copy > p[data-hero-sub] {
+    margin-top: 14px;
+  }
+
+  body[data-page="home"] .hero-actions {
+    margin-top: 18px;
+  }
+
+  body[data-page="home"] .hero-note {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  body[data-page="home"] .hero h1 {
+    font-size: 28px;
+  }
+
+  body[data-page="home"] .hero-title-lead,
+  body[data-page="home"] .hero-copy > p[data-hero-sub] {
+    font-size: 12.5px;
+  }
+}

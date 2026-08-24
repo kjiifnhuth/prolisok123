@@ -2,7 +2,7 @@
   "name": "prolisok-cms",
   "version": "2.0.0",
   "private": true,
-  "description": "Сайт ЦРД «Пролісок» з адмін-панеллю на Node.js та Express",
+  "description": "Сайт ЗДО «Пролісок» з адмін-панеллю на Node.js та Express",
   "scripts": {
     "start": "node server/server.js",
     "dev": "node --watch server/server.js",
