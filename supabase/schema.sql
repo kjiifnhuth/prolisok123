@@ -46,7 +46,7 @@ alter table public.files enable row level security;
 alter table public.admin_users enable row level security;
 
 insert into public.site_settings(key, value) values
-('general', '{"siteName":"ЗДО «Пролісок»","city":"смт Макарів","phone":"+38 (0XX) XXX-XX-XX","email":"prolisok@makariv.gov.ua","workingHours":"Понеділок — П’ятниця: 08:00 – 18:30","heroTitle":"Затишний дитячий садок для щасливого зростання","heroSub":"У ЗДО «Пролісок» ми створюємо простір, де кожна дитина почувається в безпеці, розкриває свої таланти та знаходить перших справжніх друзів."}'::jsonb)
+('general', '{"siteName":"ЦРД «Пролісок»","city":"смт Макарів","phone":"+38 (0XX) XXX-XX-XX","email":"prolisok@makariv.gov.ua","workingHours":"Понеділок — П’ятниця: 08:00 – 18:30","heroTitle":"Затишний дитячий садок для щасливого зростання","heroSub":"У ЦРД «Пролісок» ми створюємо простір, де кожна дитина почувається в безпеці, розкриває свої таланти та знаходить перших справжніх друзів."}'::jsonb)
 on conflict (key) do nothing;
 
 -- У Supabase Dashboard: Storage -> New bucket -> prolisok-files -> Public OFF.

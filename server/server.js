@@ -55,13 +55,13 @@ const PAGE_ROUTES = Object.freeze({
 const APPLICATION_STATUSES = new Set(['new', 'in_progress', 'done']);
 
 const DEFAULT_SETTINGS = Object.freeze({
-  siteName: 'ЗДО «Пролісок»',
+  siteName: 'ЦРД «Пролісок»',
   city: 'смт Макарів',
   phone: '+38 (0XX) XXX-XX-XX',
   email: 'prolisok@makariv.gov.ua',
   workingHours: 'Пн–Пт: 07:30–18:00',
   heroTitle: 'Затишний дитячий садок для щасливого зростання',
-  heroSub: 'У ЗДО «Пролісок» ми створюємо простір, де кожна дитина почувається в безпеці, розкриває свої таланти та знаходить перших справжніх друзів.',
+  heroSub: 'У ЦРД «Пролісок» ми створюємо простір, де кожна дитина почувається в безпеці, розкриває свої таланти та знаходить перших справжніх друзів.',
 });
 
 for (const directory of [DATA_DIR, UPLOAD_DIR]) {
