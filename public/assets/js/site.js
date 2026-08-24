@@ -122,12 +122,25 @@
 
     if (!menuButton || !mobileMenu) return;
 
+    // Keep the mobile navigation accessible to screen readers and keyboard users.
+    menuButton.setAttribute('aria-controls', 'mobile-menu');
+    menuButton.setAttribute('aria-expanded', 'false');
+
+    const setMenuState = (open) => {
+      mobileMenu.classList.toggle('open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+    };
+
     menuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+      setMenuState(!mobileMenu.classList.contains('open'));
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+      link.addEventListener('click', () => setMenuState(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenuState(false);
     });
   }
 

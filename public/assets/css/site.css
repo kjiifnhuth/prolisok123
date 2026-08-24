@@ -1986,3 +1986,406 @@ body[data-page="home"] .news-card-home .news-body h3 {
     white-space: normal;
   }
 }
+
+
+/* ===== Mobile polish: touch, safe areas, overflow and compact layouts ===== */
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+select {
+  min-width: 0;
+}
+
+table {
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .site-header {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .header-main {
+    min-height: 64px;
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+    max-width: calc(100% - 54px);
+    gap: 9px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    border-radius: 11px;
+  }
+
+  .brand-name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .brand-sub {
+    font-size: 9px;
+  }
+
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    border-radius: 13px;
+    font-size: 0;
+  }
+
+  .menu-btn::before {
+    content: "☰";
+    font-size: 21px;
+  }
+
+  .menu-btn[aria-expanded="true"]::before {
+    content: "×";
+    font-size: 26px;
+  }
+
+  .mobile-menu {
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    max-height: min(72vh, 520px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 8px;
+    border-radius: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-menu a {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
+    font-size: 15px;
+  }
+
+  .hero {
+    padding: 40px 0 54px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero-copy {
+    max-width: none;
+  }
+
+  .eyebrow,
+  .section-kicker {
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 10.5vw, 46px);
+    line-height: 1.02;
+  }
+
+  .hero-title-lead {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .hero-copy > p[data-hero-sub] {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    margin-top: 22px;
+    gap: 8px;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    min-height: 48px;
+    width: 100%;
+  }
+
+  .hero-note {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .hero-art {
+    width: 100%;
+    min-height: clamp(250px, 72vw, 330px);
+  }
+
+  .art-card {
+    inset: 6px 0 0;
+    border-radius: 20px;
+  }
+
+  .art-house {
+    left: 22px;
+    bottom: 50px;
+    transform: scale(.62);
+  }
+
+  .art-tree {
+    right: 6px;
+    bottom: 36px;
+    transform: scale(.62);
+  }
+
+  .art-sticker {
+    top: 18px;
+    right: 0;
+    max-width: 120px;
+    padding: 8px 10px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .section-head {
+    margin-bottom: 26px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(26px, 8vw, 32px);
+    line-height: 1.08;
+  }
+
+  .section-head p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .cards,
+  .news-grid,
+  .content-grid,
+  .contact-grid,
+  .split,
+  .footer-grid {
+    gap: 14px;
+  }
+
+  .card,
+  .story,
+  .quote,
+  .contact-card,
+  .form-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .card h3,
+  .story h3,
+  .quote h3,
+  .form-card h3,
+  .contact-card h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .card p,
+  .story p,
+  .quote p,
+  .contact-card p,
+  .form-card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .news-card,
+  .news-card-home {
+    min-width: 0;
+  }
+
+  .news-card-home .news-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .news-card-home .news-body {
+    padding: 15px 16px 18px;
+  }
+
+  .news-card-home .news-body h3 {
+    font-size: 17px;
+  }
+
+  .page-hero {
+    padding: 34px 0 30px;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(32px, 10vw, 44px);
+    line-height: 1.04;
+  }
+
+  .page-hero p {
+    font-size: 14px;
+  }
+
+  .article-shell {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .article-copy {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .article-copy img,
+  .article-copy video,
+  .article-cover {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .article-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .article-gallery img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .gallery-grid {
+    columns: 2 130px;
+    column-gap: 8px;
+  }
+
+  .gallery-item {
+    margin-bottom: 8px;
+    border-radius: 14px;
+  }
+
+  .form-grid {
+    gap: 10px;
+  }
+
+  .form-grid input,
+  .form-grid textarea,
+  .form-grid select,
+  .form-submit {
+    width: 100%;
+    min-height: 48px;
+    font-size: 16px; /* prevents iOS Safari zoom on focus */
+  }
+
+  .form-grid textarea {
+    min-height: 120px;
+  }
+
+  .contact-row {
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    gap: 8px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .floating-cta {
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .prolisok-toast {
+    right: 12px;
+    bottom: calc(66px + env(safe-area-inset-bottom));
+    max-width: calc(100vw - 24px);
+  }
+
+  /* Let wide data tables scroll instead of breaking the layout. */
+  table {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    width: calc(100% - 20px);
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 10.8vw, 42px);
+  }
+
+  .hero-art {
+    min-height: 250px;
+  }
+
+  .gallery-grid {
+    columns: 1;
+  }
+
+  .footer-bottom {
+    align-items: center;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .desktop-nav a:hover,
+  .card:hover,
+  .news-card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .mobile-cta:hover {
+    transform: none;
+  }
+}

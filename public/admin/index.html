@@ -5,6 +5,19 @@
     </script><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
       body{font-family:Nunito,sans-serif}.tab{display:none}.tab.active{display:block}.drop{border:2px dashed #cbd5e1}.drop.drag{border-color:#10b981;background:#ecfdf5}
+    
+      @media (max-width: 767px) {
+        #login { padding: max(16px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom)); }
+        #loginForm { padding: 20px; border-radius: 20px; }
+        #app > aside { width: 100%; position: sticky; top: 0; z-index: 40; padding: 12px; }
+        #app > aside nav { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+        #app > aside nav > * { flex: 0 0 auto; }
+        #app > main { width: 100%; max-width: none; padding: 14px 12px calc(24px + env(safe-area-inset-bottom)); }
+        #app button, #app a, #login button, #login input { min-height: 44px; }
+        input, textarea, select { font-size: 16px !important; }
+        img, table, pre { max-width: 100%; }
+        table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      }
     </style>
   </head>
   <body class="bg-slate-100 text-slate-800">
