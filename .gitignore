@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data
+data/db.json
+data/db.backup.json
+data/db.json.tmp
+
+# User uploads
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+# Logs & local tooling
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# OS / editor files
+*.swp
+*.swo

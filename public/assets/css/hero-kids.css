@@ -1,0 +1,37 @@
+/* Optional styles for the transparent hero illustration. */
+.hero-art.hero-art-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.hero-art-custom .hero-custom-image {
+  width: min(100%, 640px);
+  max-height: 620px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  filter: drop-shadow(0 24px 50px rgba(47, 66, 91, .12));
+  transition: transform .45s ease, filter .45s ease;
+}
+
+.hero-art-custom:hover .hero-custom-image {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 30px 60px rgba(47, 66, 91, .16));
+}
+
+@media (max-width: 900px) {
+  .hero-art-custom .hero-custom-image {
+    width: min(100%, 500px);
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-art-custom .hero-custom-image {
+    width: min(100%, 420px);
+    max-height: 420px;
+  }
+}
