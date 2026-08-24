@@ -1,37 +1,53 @@
-/* Optional styles for the transparent hero illustration. */
+/* Responsive hero artwork: visible on all devices, compact on phones. */
 .hero-art.hero-art-custom {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   overflow: visible;
 }
 
 .hero-art-custom .hero-custom-image {
-  width: min(100%, 640px);
-  max-height: 620px;
+  width: min(100%, 620px);
+  max-height: 560px;
   height: auto;
   object-fit: contain;
   display: block;
+  margin-inline: auto;
   border-radius: 0;
-  filter: drop-shadow(0 24px 50px rgba(47, 66, 91, .12));
-  transition: transform .45s ease, filter .45s ease;
-}
-
-.hero-art-custom:hover .hero-custom-image {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 30px 60px rgba(47, 66, 91, .16));
+  filter: drop-shadow(0 24px 44px rgba(31, 36, 31, .10));
 }
 
 @media (max-width: 900px) {
   .hero-art-custom .hero-custom-image {
     width: min(100%, 500px);
-    max-height: 500px;
+    max-height: 440px;
   }
 }
 
 @media (max-width: 700px) {
+  .hero-art.hero-art-custom {
+    min-height: 0;
+    margin-top: 18px;
+    padding-inline: 8px;
+  }
+
   .hero-art-custom .hero-custom-image {
-    width: min(100%, 420px);
-    max-height: 420px;
+    width: min(100%, 300px);
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-art.hero-art-custom {
+    margin-top: 12px;
+    padding-inline: 4px;
+  }
+
+  .hero-art-custom .hero-custom-image {
+    width: min(100%, 255px);
+    max-width: 255px;
+    max-height: 255px;
   }
 }
